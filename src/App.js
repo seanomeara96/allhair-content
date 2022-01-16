@@ -43,7 +43,7 @@ function App() {
           </div>
         </div>
         <div
-          style={columns}
+          style={{ ...columns, backgroundColor: "lightgray" }}
           onClick={(e) =>
             navigator.clipboard.writeText(e.target.textContent).then(
               function () {
