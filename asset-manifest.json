@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/allhair-content/static/css/main.a503b6de.css",
-    "main.js": "/allhair-content/static/js/main.83b97914.js",
+    "main.css": "/allhair-content/static/css/main.8d0ec304.css",
+    "main.js": "/allhair-content/static/js/main.80da6c3c.js",
     "static/js/787.43343911.chunk.js": "/allhair-content/static/js/787.43343911.chunk.js",
     "index.html": "/allhair-content/index.html",
-    "main.a503b6de.css.map": "/allhair-content/static/css/main.a503b6de.css.map",
-    "main.83b97914.js.map": "/allhair-content/static/js/main.83b97914.js.map",
+    "main.8d0ec304.css.map": "/allhair-content/static/css/main.8d0ec304.css.map",
+    "main.80da6c3c.js.map": "/allhair-content/static/js/main.80da6c3c.js.map",
     "787.43343911.chunk.js.map": "/allhair-content/static/js/787.43343911.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a503b6de.css",
-    "static/js/main.83b97914.js"
+    "static/css/main.8d0ec304.css",
+    "static/js/main.80da6c3c.js"
   ]
 }
