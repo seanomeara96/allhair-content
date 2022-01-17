@@ -9,10 +9,7 @@ function App() {
   const [body, setBody] = useState("");
   const defaultCopyState = { msg: "", style: "" };
   const [copySuccess, setCopySuccess] = useState(defaultCopyState);
-  const columns = {
-    width: "50%",
-    padding: "0 2rem",
-  };
+
   function flash(msg, success) {
     success
       ? setCopySuccess({ msg, style: "success" })
