@@ -11,6 +11,8 @@ function App() {
   const [copySuccess, setCopySuccess] = useState(defaultCopyState);
   const columns = {
     width: "50%",
+    padding: "2rem 0",
+    margin: "0 2rem",
   };
   function flash(msg, success) {
     success
