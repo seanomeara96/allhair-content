@@ -11,6 +11,7 @@ function App() {
   const [copySuccess, setCopySuccess] = useState(defaultCopyState);
   const columns = {
     width: "50%",
+    padding: "0 2rem",
   };
   function flash(msg, success) {
     success
@@ -18,6 +19,10 @@ function App() {
       : setCopySuccess({ msg, style: "failure" });
     setTimeout(() => setCopySuccess(defaultCopyState), 3000);
   }
+  const generatedHTML = `<details><summary>${intro.replace(
+    /(<\/p>)$/g,
+    "<b>Read More</b>$1"
+  )}</summary>${body}</details>`;
   return (
     <>
       <main
@@ -25,12 +30,13 @@ function App() {
           padding: "2rem 0",
           margin: "0 2rem",
           display: "flex",
-          height: "100%",
+
         }}
       >
         <div
           style={{
-            ...columns,
+            width: "60%",
+            paddingRight: "2rem"
           }}
         >
           <div>
@@ -42,27 +48,28 @@ function App() {
             <ReactQuill theme="snow" value={body} onChange={setBody} />
           </div>
         </div>
-        <div
-          style={{ ...columns, backgroundColor: "lightgray" }}
-          onClick={(e) =>
-            navigator.clipboard.writeText(e.target.textContent).then(
-              function () {
-                const msg = "Copying to clipboard was successful!";
-                console.log(msg);
-                flash(msg, true);
-              },
-              function (err) {
-                const msg = "Could not copy text.";
-                console.error(msg, err);
-                flash(msg, false);
-              }
-            )
-          }
-        >
-          {`<details><summary>${intro.replace(
-            "</p>",
-            "&nbsp;<b>Read More</b></p>"
-          )}</summary>${body}</details>`}
+        <div /**className="result" */ style={{
+            width: "40%",
+          }}>
+          <div
+            onClick={(e) =>
+              navigator.clipboard.writeText(e.target.textContent).then(
+                function () {
+                  const msg = "Copying to clipboard was successful!";
+                  console.log(msg);
+                  flash(msg, true);
+                },
+                function (err) {
+                  const msg = "Could not copy text.";
+                  console.error(msg, err);
+                  flash(msg, false);
+                }
+              )
+            }
+          >
+            {generatedHTML}
+          </div>
+        {/**  <div dangerouslySetInnerHTML={{ __html: generatedHTML }}></div> */}
         </div>
       </main>
       <i className={`success-message ${copySuccess.style}`}>
