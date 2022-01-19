@@ -1,8 +1,29 @@
 import "./App.css";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import React, { useState } from "react";
 
 import "react-quill/dist/quill.snow.css";
+
+const Link = Quill.import("formats/link");
+
+class MyLink extends Link {
+  static create(value) {
+    console.log(value);
+    let node = super.create(value);
+    value = this.sanitize(value);
+    node.setAttribute("href", value);
+    if (
+      value.startsWith("http://localhost:3000/") ||
+      value.startsWith("https://www.allhair.ie/")
+    ) {
+      node.removeAttribute("target");
+      node.removeAttribute("rel");
+    }
+    return node;
+  }
+}
+
+Quill.register(MyLink);
 
 function App() {
   const [intro, setIntro] = useState("");
@@ -27,27 +48,38 @@ function App() {
           padding: "2rem 0",
           margin: "0 2rem",
           display: "flex",
-
         }}
       >
         <div
           style={{
             width: "60%",
-            paddingRight: "2rem"
+            paddingRight: "2rem",
           }}
         >
           <div>
             <h2>Introduction</h2>
-            <ReactQuill theme="snow" value={intro} onChange={setIntro} />
+            <ReactQuill
+
+              theme="snow"
+              value={intro}
+              onChange={setIntro}
+            />
           </div>
           <div className="body">
             <h2>Body</h2>
-            <ReactQuill theme="snow" value={body} onChange={setBody} />
+            <ReactQuill
+
+              theme="snow"
+              value={body}
+              onChange={setBody}
+            />
           </div>
         </div>
-        <div /**className="result" */ style={{
+        <div
+          /**className="result" */ style={{
             width: "40%",
-          }}>
+          }}
+        >
           <div
             onClick={(e) =>
               navigator.clipboard.writeText(e.target.textContent).then(
@@ -66,7 +98,7 @@ function App() {
           >
             {generatedHTML}
           </div>
-        {/**  <div dangerouslySetInnerHTML={{ __html: generatedHTML }}></div> */}
+          {/**  <div dangerouslySetInnerHTML={{ __html: generatedHTML }}></div> */}
         </div>
       </main>
       <i className={`success-message ${copySuccess.style}`}>
