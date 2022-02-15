@@ -39,7 +39,7 @@ function App() {
   }
   const generatedHTML = `<details><summary>${intro.replace(
     /(<\/p>)$/g,
-    "<b>Read More</b>$1"
+    " <b>Read More</b>$1"
   )}</summary>${body}</details>`;
   return (
     <>
