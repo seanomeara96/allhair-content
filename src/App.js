@@ -37,10 +37,13 @@ function App() {
       : setCopySuccess({ msg, style: "failure" });
     setTimeout(() => setCopySuccess(defaultCopyState), 3000);
   }
-  const generatedHTML = `<details><summary>${intro.replace(
+  function removeStyles (htmlString){
+    return htmlString.replace(/\sstyle="(.|\n)*?"/gi, "")
+}
+  const generatedHTML = removeStyles(`<details><summary>${intro.replace(
     /(<\/p>)$/g,
     " <b>Read More</b>$1"
-  )}</summary>${body}</details>`;
+  )}</summary>${body}</details>`);
   return (
     <>
       <main
