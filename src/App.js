@@ -37,13 +37,21 @@ function App() {
       : setCopySuccess({ msg, style: "failure" });
     setTimeout(() => setCopySuccess(defaultCopyState), 3000);
   }
-  function removeStyles (htmlString){
-    return htmlString.replace(/\sstyle="(.|\n)*?"/gi, "")
-}
-  const generatedHTML = removeStyles(`<details><summary>${intro.replace(
-    /(<\/p>)$/g,
-    " <b>Read More</b>$1"
-  )}</summary>${body}</details>`);
+  function removeStyles(htmlString) {
+    return htmlString.replace(/\sstyle="(.|\n)*?"/gi, "");
+  }
+  function removeBlankTarget(htmlString) {
+    return htmlString.replace(/\starget="_blank"/gi, "");
+  }
+  function postProcess(string) {
+    return removeBlankTarget(removeStyles(string));
+  }
+  const generatedHTML = postProcess(
+    `<details><summary>${intro.replace(
+      /(<\/p>)$/g,
+      " <b>Read More</b>$1"
+    )}</summary>${body}</details>`
+  );
   return (
     <>
       <main
@@ -61,21 +69,11 @@ function App() {
         >
           <div>
             <h2>Introduction</h2>
-            <ReactQuill
-
-              theme="snow"
-              value={intro}
-              onChange={setIntro}
-            />
+            <ReactQuill theme="snow" value={intro} onChange={setIntro} />
           </div>
           <div className="body">
             <h2>Body</h2>
-            <ReactQuill
-
-              theme="snow"
-              value={body}
-              onChange={setBody}
-            />
+            <ReactQuill theme="snow" value={body} onChange={setBody} />
           </div>
         </div>
         <div
